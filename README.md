@@ -21,6 +21,7 @@ Or for path-aware tools:
 
 ```
 $ golint $(gopt paths)
+$ go tool vet $(gopt paths)
 ```
 
 ### More
