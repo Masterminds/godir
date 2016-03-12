@@ -37,6 +37,12 @@ func main() {
 	app.Name = "gopt"
 	app.Usage = Description
 	app.Version = version
+	app.Action = func(c *cli.Context) {
+		sp := putil.Subpaths(wdir(), true)
+		for _, p := range sp {
+			fmt.Println(putil.Name(p))
+		}
+	}
 	commands(app)
 	app.Run(os.Args)
 }
