@@ -1,6 +1,6 @@
-# gopt: The Go Path Tool
+# godir: The Go Directory Tool
 
-`gopt` is a tool for working with Go source files in a Go-sensitive way.
+`godir` is a tool for working with Go source files in a Go-sensitive way.
 It is designed to make it easier for you to work with Go operations.
 
 This is a tool to help with your...
@@ -14,14 +14,14 @@ This is a tool to help with your...
 Run tests while ignoring `vendor/`
 
 ```
-$ go test $(gopt pkgs)
+$ go test $(godir pkgs)
 ```
 
 Or for path-aware tools:
 
 ```
-$ golint $(gopt paths)
-$ go tool vet $(gopt paths)
+$ golint $(godir paths)
+$ go tool vet $(godir paths)
 ```
 
 ### More
@@ -29,22 +29,22 @@ $ go tool vet $(gopt paths)
 With a multi-path `$GOPATH`, find which path the current package is on:
 
 ```
-⇒  gopt gopath
+⇒  godir gopath
 /Users/mbutcher/Code/Go
 ```
 
 Get the name of the current package, even with a compound `$GOPATH`:
 
 ```
-⇒  gopt name
+⇒  godir name
 github.com/Masterminds/glide
 ```
 
-Get a list of subpackages in the project with `gopt pkgs`. Note that
+Get a list of subpackages in the project with `godir pkgs`. Note that
 this only returns packages that have source files (not including tests).
 
 ```
-⇒  gopt pkgs
+⇒  godir pkgs
 github.com/Masterminds/glide/action
 github.com/Masterminds/glide/cfg
 github.com/Masterminds/glide/dependency
@@ -62,7 +62,7 @@ github.com/Masterminds/glide/util
 Or if you want to work with paths instead:
 
 ```
-⇒  gopt paths
+⇒  godir paths
 /Users/mbutcher/Code/Go/src/github.com/Masterminds/glide/action
 /Users/mbutcher/Code/Go/src/github.com/Masterminds/glide/cfg
 /Users/mbutcher/Code/Go/src/github.com/Masterminds/glide/dependency
@@ -83,7 +83,7 @@ Note that this does not restrict to only paths with source!
 ## Installation
 
 ```
-$ go get github.com/Masterminds/gopt
+$ go get github.com/Masterminds/godir
 ```
 
 For development:

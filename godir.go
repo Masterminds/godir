@@ -5,13 +5,13 @@ import (
 	"os"
 	"path/filepath"
 
-	putil "github.com/Masterminds/gopt/pathutil"
+	putil "github.com/Masterminds/godir/pathutil"
 	"github.com/codegangsta/cli"
 )
 
 var version = "0.0.1"
 
-var Description = `gopt - The Go Path Tool
+var Description = `godir - The Go Path Tool
 
 This tool is a utility for working with paths that are significant for Go.
 
@@ -23,18 +23,18 @@ EXAMPLES:
 
 Run "go test" without running the tests in vendor:
 
-	$ go test $(gopt pkgs)
+	$ go test $(godir pkgs)
 
 Given a case where $GOPATH has more than one path, show which path the current
 code lives on.
 
-	$ GOPATH=~/Code/Go:~/Code/tmp gopt gopath
+	$ GOPATH=~/Code/Go:~/Code/tmp godir gopath
 	/Users/mbutcher/Code/Go
 `
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "gopt"
+	app.Name = "godir"
 	app.Usage = Description
 	app.Version = version
 	app.Action = func(c *cli.Context) {
