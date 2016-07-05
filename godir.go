@@ -37,12 +37,7 @@ func main() {
 	app.Name = "godir"
 	app.Usage = Description
 	app.Version = version
-	app.Action = func(c *cli.Context) {
-		sp := putil.Subpaths(wdir(), true)
-		for _, p := range sp {
-			fmt.Println(putil.Name(p))
-		}
-	}
+	app.Action = listPackages
 	commands(app)
 	app.Run(os.Args)
 }
@@ -66,15 +61,9 @@ func commands(app *cli.App) {
 			},
 		},
 		{
-			Name:  "pkgs",
-			Usage: "Print all packages (that contain Go code) from the current directory. Skip vendor/",
-			Action: func(c *cli.Context) {
-				wd := argOrWdir(c)
-				sp := putil.Subpaths(wd, true)
-				for _, p := range sp {
-					fmt.Println(putil.Name(p))
-				}
-			},
+			Name:   "pkgs",
+			Usage:  "Print all packages (that contain Go code) from the current directory. Skip vendor/",
+			Action: listPackages,
 		},
 		{
 			Name:  "paths",
@@ -100,6 +89,13 @@ func commands(app *cli.App) {
 				},
 			},
 		},
+	}
+}
+
+func listPackages(c *cli.Context) {
+	sp := putil.Subpaths(argOrWdir(c), true)
+	for _, p := range sp {
+		fmt.Println(putil.Name(p))
 	}
 }
 
