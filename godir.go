@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	putil "github.com/Masterminds/godir/pathutil"
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 var version = "0.0.1"
@@ -48,16 +48,18 @@ func commands(app *cli.App) {
 			Name:      "name",
 			Usage:     "Print the name of this package, relative to $GOPATH.",
 			ArgsUsage: "[PATH]",
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				fmt.Println(putil.Name(argOrWdir(c)))
+				return nil
 			},
 		},
 		{
 			Name:      "gopath",
 			Usage:     "Print the path in $GOPATH that the given package was found on.\n\tThis is for cases where $GOPATH has numerous paths.",
 			ArgsUsage: "[PATH]",
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				fmt.Println(putil.WhichGopath(argOrWdir(c)))
+				return nil
 			},
 		},
 		{
@@ -68,7 +70,7 @@ func commands(app *cli.App) {
 		{
 			Name:  "paths",
 			Usage: "Print all subpaths from the current directory.",
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				wd := argOrWdir(c)
 				sp := putil.Subpaths(wd, false)
 				r := c.Bool("relative")
@@ -81,6 +83,7 @@ func commands(app *cli.App) {
 					}
 					fmt.Println(p)
 				}
+				return nil
 			},
 			Flags: []cli.Flag{
 				cli.BoolFlag{
@@ -92,11 +95,12 @@ func commands(app *cli.App) {
 	}
 }
 
-func listPackages(c *cli.Context) {
+func listPackages(c *cli.Context) error {
 	sp := putil.Subpaths(argOrWdir(c), true)
 	for _, p := range sp {
 		fmt.Println(putil.Name(p))
 	}
+	return nil
 }
 
 func argOrWdir(c *cli.Context) string {
